@@ -29,6 +29,7 @@ export async function deleteAll(collectionName) {
         console.log("delete all", err);
     }
 }
+
 /*
 * updateDoc only updates existing fields. If the field doesn't exist, it won't add it to the document.
 *
@@ -38,11 +39,25 @@ export async function deleteAll(collectionName) {
 export async function addWarning(goalId) {
     try {
         const goalRef = doc(db, "goals", goalId);
-        await setDoc(goalRef,{
+        await setDoc(goalRef, {
             warning: true,
         }, {merge: true});
         console.log("Warning added successfully");
     } catch (err) {
         console.log("error in add warning", err);
+    }
+}
+
+export async function getAllDocs(collectionName) {
+    try {
+        const querySnapshot = await getDocs(collection(db, collectionName));
+        let newArray = [];
+        querySnapshot.forEach((docSnapshot) => {
+            newArray.push(docSnapshot.data());
+        });
+        console.log("arry from readDocs", newArray);
+        return newArray;
+    } catch (err) {
+        console.log(err);
     }
 }

@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import PressableButton from "./PressableButton";
 import {FontAwesome} from "@expo/vector-icons";
 import {addWarning} from "../Firebase/firestoreHelper";
+import GoalUsers from "./GoalUsers";
 
 /* goal is passed as a prop from the parent component */
 export const GoalDetails = ({navigation, route}) => {
@@ -40,6 +41,7 @@ export const GoalDetails = ({navigation, route}) => {
                     navigation.push("Details");
                 }}
             />
+            <GoalUsers id={route.params.goal.id}/>
         </View>
 
     );
